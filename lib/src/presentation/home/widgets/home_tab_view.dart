@@ -177,39 +177,37 @@ class _HomeTabViewState extends State<HomeTabView> {
               child: Text('Danh mục các ngày kỉ niệm'),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Expanded(
-                child: GridView.count(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: List.generate(
-                    8,
-                    (index) => ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Container(
-                                color: const Color(0xFFFFD4DE),
-                                width: MediaQuery.of(context).size.height * 0.07,
-                                height: MediaQuery.of(context).size.height * 0.07,
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Placeholder(
-                                    fallbackHeight: 1,
-                                  ),
+              height: MediaQuery.of(context).size.height * 0.4,
+              child: GridView.count(
+                crossAxisCount: 4,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+                physics: const NeverScrollableScrollPhysics(),
+                children: List.generate(
+                  8,
+                  (index) => ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Container(
+                              color: const Color(0xFFFFD4DE),
+                              width: MediaQuery.of(context).size.height * 0.07,
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Placeholder(
+                                  fallbackHeight: 1,
                                 ),
                               ),
                             ),
-                            Text('dumm $index')
-                          ],
-                        ),
+                          ),
+                          Text('dumm $index')
+                        ],
                       ),
                     ),
                   ),
