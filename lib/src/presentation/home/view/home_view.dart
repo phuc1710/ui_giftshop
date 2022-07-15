@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../model/icon/gift_shop_app_icons.dart';
+import '../../gift_finding/view/gift_finding_by_age_view.dart';
 import '../widgets/home_tab_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -35,7 +36,13 @@ class _HomeViewState extends State<HomeView> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push<Object?>(
+                MaterialPageRoute(
+                  builder: (context) => const GiftFindingByAgeView(),
+                ),
+              );
+            },
             backgroundColor: const Color(0xFFFFD4DE),
             child: const Icon(
               GiftShopAppIcon.box,
@@ -56,7 +63,7 @@ class _HomeViewState extends State<HomeView> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               selectedItemColor: const Color(0xFFF27280),
-              unselectedItemColor: const Color(0xFFFFD4DE),
+              unselectedItemColor: const Color(0xFFF27280),
               unselectedLabelStyle: const TextStyle(color: Colors.black),
               currentIndex: _selectedIndex,
               onTap: (index) => setState(() => _selectedIndex = index),

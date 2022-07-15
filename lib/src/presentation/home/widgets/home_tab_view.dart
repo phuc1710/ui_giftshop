@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../model/icon/gift_shop_app_icons.dart';
+import '../../gift_finding/view/gift_finding_result_view.dart';
 import 'page_indicator.dart';
 
 class HomeTabView extends StatefulWidget {
@@ -30,13 +31,19 @@ class _HomeTabViewState extends State<HomeTabView> {
               child: const HeaderRow(),
             ),
             const ImageSlider(),
-            const Text('Quà sinh nhật phổ biến'),
-            const PopularGifts(),
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0),
-              child: Text('Danh mục các ngày kỉ niệm'),
+            const Text(
+              'Quà sinh nhật phổ biến',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const CategorySection()
+            PopularGifts(),
+            const Padding(
+              padding: EdgeInsets.only(top: 8.0, bottom: 4),
+              child: Text(
+                'Danh mục các ngày kỉ niệm',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            CategorySection()
           ],
         ),
       ),
@@ -45,14 +52,36 @@ class _HomeTabViewState extends State<HomeTabView> {
 }
 
 class CategorySection extends StatelessWidget {
-  const CategorySection({
+  CategorySection({
     Key? key,
   }) : super(key: key);
+
+  final List<IconData> icons = [
+    GiftShopAppIcon.birthday_cake,
+    GiftShopAppIcon.woman,
+    GiftShopAppIcon.mother,
+    GiftShopAppIcon.graduation_hat,
+    GiftShopAppIcon.children,
+    GiftShopAppIcon.new_house,
+    GiftShopAppIcon.valentines_day,
+    GiftShopAppIcon.teaching
+  ];
+
+  final List<String> occasions = [
+    'Sinh nhật',
+    'Ngày 8/3',
+    'Ngày của mẹ',
+    'Tốt nghiệp',
+    'Ngày 1/6',
+    'Tân gia',
+    'Valentine',
+    'Ngày 20/11',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.3,
       child: GridView.count(
         crossAxisCount: 4,
         mainAxisSpacing: 20,
@@ -60,29 +89,33 @@ class CategorySection extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: List.generate(
           8,
-          (index) => ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Container(
-                      color: const Color(0xFFFFD4DE),
-                      width: MediaQuery.of(context).size.height * 0.07,
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Placeholder(
-                          fallbackHeight: 1,
+          (index) => InkWell(
+            onTap: () {},
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Container(
+                        color: const Color(0xFFFFD4DE),
+                        width: MediaQuery.of(context).size.height * 0.07,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            icons[index],
+                            size: 32,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Text('dumm $index')
-                ],
+                    Text(occasions[index], style: const TextStyle(fontSize: 10))
+                  ],
+                ),
               ),
             ),
           ),
@@ -93,9 +126,35 @@ class CategorySection extends StatelessWidget {
 }
 
 class PopularGifts extends StatelessWidget {
-  const PopularGifts({
+  PopularGifts({
     Key? key,
   }) : super(key: key);
+
+  final List<String> product = [
+    'Gấu Teddy',
+    'Thỏ trắng',
+    'Minions',
+    'Ngựa cưỡi',
+    'Rô bốt',
+    'Xe 4 bánh',
+  ];
+  final List<String> price = [
+    '220 000 đ',
+    '150 000 đ',
+    '220 000 đ',
+    '150 000 đ',
+    '220 000 đ',
+    '150 000 đ',
+  ];
+
+  final List<String> imageFileName = [
+    'teddy',
+    'rabbit',
+    'minion',
+    'horse',
+    'robot',
+    'bike'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +163,9 @@ class PopularGifts extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: product.length,
         itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 16),
+          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Container(
@@ -115,20 +174,32 @@ class PopularGifts extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.blue,
-                        child: const Placeholder(
-                          fallbackHeight: 50,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: SizedBox.square(
+                        dimension: MediaQuery.of(context).size.height * 0.09,
+                        child: FittedBox(
+                          fit: BoxFit.cover,
+                          child: Image.asset(
+                            'assets/images/${imageFileName[index]}.jpg',
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Text('dummy $index'),
-                  Text('dummy $index')
+                  Text(
+                    product[index],
+                    style: const TextStyle(fontSize: 10),
+                  ),
+                  Text(
+                    price[index],
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
                 ],
               ),
             ),
@@ -155,7 +226,7 @@ class _ImageSliderState extends State<ImageSlider> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+    Timer.periodic(const Duration(seconds: 5), (Timer timer) {
       if (page < 2) {
         page++;
       } else {
@@ -165,8 +236,8 @@ class _ImageSliderState extends State<ImageSlider> {
       if (_controller.hasClients)
         _controller.animateToPage(
           page,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.ease,
+          duration: const Duration(milliseconds: 400),
+          curve: Curves.easeIn,
         );
     });
   }
@@ -230,7 +301,7 @@ class HeaderRow extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {},
-          child: const Icon(GiftShopAppIcon.box),
+          child: const Icon(Icons.adobe_outlined),
         ),
         Expanded(
           child: Padding(
@@ -250,6 +321,14 @@ class HeaderRow extends StatelessWidget {
                 ],
               ),
               child: TextField(
+                textInputAction: TextInputAction.search,
+                onSubmitted: (value) =>
+                    Navigator.of(context).pushAndRemoveUntil<Object?>(
+                  MaterialPageRoute(
+                    builder: (context) => const GiftFindingResultView(),
+                  ),
+                  (route) => route.isFirst,
+                ),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.only(
@@ -257,6 +336,7 @@ class HeaderRow extends StatelessWidget {
                     left: MediaQuery.of(context).size.width * 0.03,
                   ),
                   hintText: 'Nhập tên món quà của bạn?',
+                  hintStyle: const TextStyle(fontSize: 14),
                   suffixIcon: const Icon(Icons.search),
                 ),
               ),
@@ -265,7 +345,7 @@ class HeaderRow extends StatelessWidget {
         ),
         InkWell(
           onTap: () {},
-          child: const Icon(GiftShopAppIcon.box),
+          child: const Icon(Icons.shopping_cart_outlined),
         ),
       ],
     );
