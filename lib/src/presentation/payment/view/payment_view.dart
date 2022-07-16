@@ -301,7 +301,7 @@ class _PaymentViewState extends State<PaymentView> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       const Text('Tổng thanh toán'),
-                                      Text('$totalValue đ'),
+                                      Text('$totalValueWithShipping đ'),
                                     ],
                                   )
                                 ],
