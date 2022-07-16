@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../model/cart/cart.dart';
+import '../../complete_payment/view/complete_payment_view.dart';
 
 class PaymentView extends StatefulWidget {
   const PaymentView({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class PaymentView extends StatefulWidget {
 class _PaymentViewState extends State<PaymentView> {
   String totalValue = calcTotalPrice(cartItemsList);
   String totalValueWithShipping = calcTotalPriceAndShipping(cartItemsList);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -345,7 +347,7 @@ class _PaymentViewState extends State<PaymentView> {
                     child: InkWell(
                       onTap: () => Navigator.of(context).push<Object?>(
                         MaterialPageRoute(
-                          builder: (context) => Container(),
+                          builder: (context) => const CompletePaymentView(),
                         ),
                       ),
                       child: Stack(
