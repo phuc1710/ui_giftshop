@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../model/icon/gift_shop_app_icons.dart';
+import '../../cart/view/cart_view.dart';
 import '../../gift_finding/view/gift_finding_result_view.dart';
 import 'page_indicator.dart';
 
@@ -246,7 +247,7 @@ class _ImageSliderState extends State<ImageSlider> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: MediaQuery.of(context).size.height * 0.03,
+        vertical: MediaQuery.of(context).size.height * 0.02,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15),
@@ -344,7 +345,12 @@ class HeaderRow extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push<Object?>(
+              context,
+              MaterialPageRoute(builder: (context) => const CartView()),
+            );
+          },
           child: const Icon(Icons.shopping_cart_outlined),
         ),
       ],

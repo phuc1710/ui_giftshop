@@ -2,55 +2,64 @@ class Product {
   const Product({
     this.name,
     this.price,
-    this.imagePath,
+    this.id,
     this.description,
   });
 
   int? priceToInt() {
-    return price?.replaceAll('.', '').replaceAll('đ', '') as int?;
+    return int.parse(
+      price?.replaceAll('.', '').replaceAll('đ', '').replaceAll(' ', '') ?? '',
+    );
   }
 
   final String? name;
   final String? price;
-  final String? imagePath;
+  final String? id;
   final String? description;
 }
+
+const teddy = Product(
+  name: 'Gấu bông',
+  price: '220.000 đ',
+  id: 'teddy',
+  description: '',
+);
 
 final productList = [
   const Product(
     name: 'Gấu bông',
-    price: '220.000đ',
-    imagePath: 'teddy',
+    price: '220.000 đ',
+    id: 'teddy',
     description: '',
   ),
   const Product(
     name: 'Thỏ trắng',
-    price: '150.000đ',
-    imagePath: 'rabbit',
+    price: '150.000 đ',
+    id: 'rabbit',
     description: '',
   ),
   const Product(
     name: 'Minion',
-    price: '220.000đ',
-    imagePath: 'minion',
+    price: '220.000 đ',
+    id: 'minion',
     description: '',
   ),
   const Product(
     name: 'Ngựa cưỡi',
-    price: '150.000đ',
-    imagePath: 'horse',
+    price: '150.000 đ',
+    id: 'horse',
     description: '',
   ),
   const Product(
     name: 'Rô bốt',
-    price: '220.000đ',
-    imagePath: 'robot',
+    price: '220.000 đ',
+    id: 'robot',
     description: '',
   ),
   const Product(
     name: 'Xe 4 bánh',
-    price: '150.000đ',
-    imagePath: 'bike',
+    price: '150.000 đ',
+    id: 'bike',
     description: '',
   ),
 ];

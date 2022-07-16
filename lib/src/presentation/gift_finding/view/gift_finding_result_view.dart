@@ -82,7 +82,7 @@ class _GiftFindingResultViewState extends State<GiftFindingResultView> {
                             builder: (context) => GiftDetailView(
                               name: productList[index].name ?? '',
                               price: productList[index].price ?? '',
-                              imagePath: productList[index].imagePath ?? '',
+                              imagePath: productList[index].id ?? '',
                               description: '',
                             ),
                           ),
@@ -111,9 +111,9 @@ class _GiftFindingResultViewState extends State<GiftFindingResultView> {
                                       fit: BoxFit.cover,
                                       child: Hero(
                                         tag:
-                                            '${productList[index].imagePath}ImagePath',
+                                            '${productList[index].id}ImagePath',
                                         child: Image.asset(
-                                          'assets/images/${productList[index].imagePath}.jpg',
+                                          'assets/images/${productList[index].id}.jpg',
                                         ),
                                       ),
                                     ),
@@ -121,14 +121,14 @@ class _GiftFindingResultViewState extends State<GiftFindingResultView> {
                                 ),
                               ),
                               Hero(
-                                tag: '${productList[index].imagePath}Name',
+                                tag: '${productList[index].id}Name',
                                 child: Material(
                                   color: Colors.transparent,
                                   child: Text('${productList[index].name}'),
                                 ),
                               ),
                               Hero(
-                                tag: '${productList[index].imagePath}Price',
+                                tag: '${productList[index].id}Price',
                                 child: Material(
                                   color: Colors.transparent,
                                   child: Text(
