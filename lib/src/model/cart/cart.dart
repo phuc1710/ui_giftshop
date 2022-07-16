@@ -15,7 +15,13 @@ class CartItem {
       productList.firstWhere((e) => e.id == itemId).price;
 }
 
-List<CartItem> cartItemsList = [CartItem('teddy', 1), CartItem('bike', 1), CartItem('rabbit', 2)];
+List<CartItem> cartItemsList = [
+  CartItem('teddy', 1),
+  CartItem('bike', 1),
+  CartItem('rabbit', 2)
+];
+
+NumberFormat f = NumberFormat('###,###', 'en_US');
 
 String calcTotalPrice(List<CartItem> cartList) {
   int price = 0;
@@ -26,4 +32,12 @@ String calcTotalPrice(List<CartItem> cartList) {
   return f.format(price);
 }
 
-NumberFormat f = NumberFormat('###,###', 'en_US');
+String calcTotalPriceAndShipping(List<CartItem> cartList) {
+  int price = 0;
+  for (final element in cartList) {
+    price += element.getItemPrice() * element.quantity;
+  }
+  price += 30000;
+
+  return f.format(price);
+}

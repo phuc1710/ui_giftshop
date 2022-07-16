@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../model/cart/cart.dart';
+import '../../payment/view/payment_view.dart';
 
 class CartView extends StatefulWidget {
   const CartView({Key? key}) : super(key: key);
@@ -166,7 +167,11 @@ class _CartViewState extends State<CartView> {
                         ),
                         Expanded(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () => Navigator.of(context).push<Object?>(
+                              MaterialPageRoute(
+                                builder: (context) => const PaymentView(),
+                              ),
+                            ),
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
