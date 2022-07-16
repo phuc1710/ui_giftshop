@@ -8,7 +8,7 @@ class Product {
 
   int? priceToInt() {
     return int.parse(
-      price?.replaceAll('.', '').replaceAll('đ', '').replaceAll(' ', '') ?? '',
+      price?.replaceAll(',', '').replaceAll('đ', '').replaceAll(' ', '') ?? '',
     );
   }
 
