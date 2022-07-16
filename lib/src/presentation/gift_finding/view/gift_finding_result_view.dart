@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../model/product/product_detail.dart';
+import '../../gift_detail/view/gift_detail_view.dart';
+
 class GiftFindingResultView extends StatefulWidget {
   const GiftFindingResultView({Key? key}) : super(key: key);
 
@@ -16,6 +19,7 @@ class _GiftFindingResultViewState extends State<GiftFindingResultView> {
     'Rô bốt',
     'Xe 4 bánh',
   ];
+
   List<String> price = [
     '220 000 đ',
     '150 000 đ',
@@ -69,9 +73,21 @@ class _GiftFindingResultViewState extends State<GiftFindingResultView> {
                   crossAxisSpacing: 20,
                   childAspectRatio: 0.8,
                   children: List.generate(
-                    product.length,
+                    productList.length,
                     (index) => InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push<Object?>(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GiftDetailView(
+                              name: productList[index].name ?? '',
+                              price: productList[index].price ?? '',
+                              imagePath: productList[index].imagePath ?? '',
+                              description: '',
+                            ),
+                          ),
+                        );
+                      },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Container(
@@ -93,18 +109,34 @@ class _GiftFindingResultViewState extends State<GiftFindingResultView> {
                                             0.18,
                                     child: FittedBox(
                                       fit: BoxFit.cover,
-                                      child: Image.asset(
-                                        'assets/images/${imageFileName[index]}.jpg',
+                                      child: Hero(
+                                        tag:
+                                            '${productList[index].imagePath}ImagePath',
+                                        child: Image.asset(
+                                          'assets/images/${productList[index].imagePath}.jpg',
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                              Text(product[index]),
-                              Text(
-                                price[index],
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                              Hero(
+                                tag: '${productList[index].imagePath}Name',
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: Text('${productList[index].name}'),
+                                ),
+                              ),
+                              Hero(
+                                tag: '${productList[index].imagePath}Price',
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: Text(
+                                    productList[index].price ?? '',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               )
                             ],
