@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../model/product/product_detail.dart';
-import '../../gift_detail/view/gift_detail_view.dart';
 
 class GiftFindingResultView extends StatefulWidget {
   const GiftFindingResultView({Key? key}) : super(key: key);
@@ -11,33 +10,6 @@ class GiftFindingResultView extends StatefulWidget {
 }
 
 class _GiftFindingResultViewState extends State<GiftFindingResultView> {
-  List<String> product = [
-    'Gấu Teddy',
-    'Thỏ trắng',
-    'Minions',
-    'Ngựa cưỡi',
-    'Rô bốt',
-    'Xe 4 bánh',
-  ];
-
-  List<String> price = [
-    '220 000 đ',
-    '150 000 đ',
-    '220 000 đ',
-    '150 000 đ',
-    '220 000 đ',
-    '150 000 đ',
-  ];
-
-  List<String> imageFileName = [
-    'teddy',
-    'rabbit',
-    'minion',
-    'horse',
-    'robot',
-    'bike'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -76,17 +48,17 @@ class _GiftFindingResultViewState extends State<GiftFindingResultView> {
                     productList.length,
                     (index) => InkWell(
                       onTap: () {
-                        Navigator.push<Object?>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => GiftDetailView(
-                              name: productList[index].name ?? '',
-                              price: productList[index].price ?? '',
-                              imagePath: productList[index].id ?? '',
-                              description: '',
-                            ),
-                          ),
-                        );
+                        // Navigator.push<Object?>(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => GiftDetailView(
+                        //       name: productList[index].name ?? '',
+                        //       price: productList[index].price ?? '',
+                        //       imagePath: productList[index].id ?? '',
+                        //       description: '',
+                        //     ),
+                        //   ),
+                        // );
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
