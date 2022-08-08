@@ -11,7 +11,7 @@ class GiftFindingByOccasionView extends StatefulWidget {
 }
 
 class _GiftFindingByOccasionViewState extends State<GiftFindingByOccasionView> {
-  int selectedIndex = -1;
+  int selectedIndex = 0;
   List<String> occasions = [
     'Sinh nhật',
     'Ngày 8/3',
@@ -44,8 +44,8 @@ class _GiftFindingByOccasionViewState extends State<GiftFindingByOccasionView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    height: MediaQuery.of(context).size.height * 0.4,
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     child: FittedBox(
                       child: Image.asset('assets/images/gift_finder_1.png'),
                     ),
@@ -104,13 +104,7 @@ class _GiftFindingByOccasionViewState extends State<GiftFindingByOccasionView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InkWell(
-                    onTap: () => selectedIndex == -1
-                        ? ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Vui lòng chọn một câu trả lời'),
-                            ),
-                          )
-                        : Navigator.of(context).pop(),
+                    onTap: () => Navigator.of(context).pop(),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: MediaQuery.of(context).size.height * 0.02,
