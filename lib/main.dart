@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'src/presentation/home/view/home_view.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Future.delayed(
+    const Duration(milliseconds: 150),
+    () => runApp(const MyApp())
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
