@@ -10,7 +10,7 @@ class GiftFindingByAgeView extends StatefulWidget {
 }
 
 class _GiftFindingByAgeViewState extends State<GiftFindingByAgeView> {
-  int selectedIndex = -1;
+  int selectedIndex = 2;
   List<String> ageRanges = [
     'Dưới 3 tuổi',
     'Từ 3 tới 5 tuổi',
@@ -45,8 +45,8 @@ class _GiftFindingByAgeViewState extends State<GiftFindingByAgeView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    height: MediaQuery.of(context).size.height * 0.4,
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     child: FittedBox(
                       child: Image.asset('assets/images/gift_finder_0.png'),
                     ),
