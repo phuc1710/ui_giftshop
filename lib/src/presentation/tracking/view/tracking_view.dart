@@ -10,7 +10,8 @@ class TrackingView extends StatefulWidget {
 }
 
 class _TrackingViewState extends State<TrackingView> {
-  String totalValueWithShipping = calcTotalPriceAndShipping(cartItemsList);
+  String totalValueWithShipping =
+      calcTotalPriceAndNormalShipping(cartItemsList);
 
   @override
   Widget build(BuildContext context) {
