@@ -15,11 +15,7 @@ class CartItem {
       productList.firstWhere((e) => e.id == itemId).price;
 }
 
-List<CartItem> cartItemsList = [
-  CartItem('teddy', 1),
-  CartItem('bike', 1),
-  CartItem('rabbit', 2)
-];
+List<CartItem> cartItemsList = [];
 
 NumberFormat f = NumberFormat('###,###', 'en_US');
 
@@ -32,12 +28,26 @@ String calcTotalPrice(List<CartItem> cartList) {
   return f.format(price);
 }
 
-String calcTotalPriceAndShipping(List<CartItem> cartList) {
+String calcTotalPriceAndNormalShipping(List<CartItem> cartList) {
   int price = 0;
   for (final element in cartList) {
     price += element.getItemPrice() * element.quantity;
   }
-  price += 30000;
+  price += 20000;
 
   return f.format(price);
 }
+
+String calcTotalPriceAndTimedShipping(List<CartItem> cartList) {
+  int price = 0;
+  for (final element in cartList) {
+    price += element.getItemPrice() * element.quantity;
+  }
+  price += 40000;
+
+  return f.format(price);
+}
+
+String name = 'Lê Hiếu';
+String phoneNumber = '(+84) 933177122';
+String address = '227 Nguyễn Văn Cừ, phường 8, quận 5, Hồ Chí Minh';

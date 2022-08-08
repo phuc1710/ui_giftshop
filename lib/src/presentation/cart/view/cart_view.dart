@@ -33,6 +33,8 @@ class _CartViewState extends State<CartView> {
                     child: ListView.builder(
                       itemCount: cartItemsList.length,
                       itemBuilder: (context, index) {
+                        bool favorite = false;
+
                         return Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal:
@@ -66,9 +68,18 @@ class _CartViewState extends State<CartView> {
                                     Text(
                                       '${cartItemsList[index].getItemPriceString()}',
                                     ),
-                                    const Icon(
-                                      Icons.favorite,
-                                      color: Color(0xFFF27280),
+                                    StatefulBuilder(
+                                      builder: (context, setState) => InkWell(
+                                        onTap: () => setState(
+                                          () => favorite = !favorite,
+                                        ),
+                                        child: Icon(
+                                          favorite
+                                              ? Icons.favorite
+                                              : Icons.favorite_outline,
+                                          color: const Color(0xFFF27280),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -211,6 +222,9 @@ class _CartViewState extends State<CartView> {
     return setState(() {
       if (cartItemsList[index].quantity > 0) {
         cartItemsList[index].quantity--;
+        if (cartItemsList[index].quantity == 0) {
+          cartItemsList.removeAt(index);
+        }
         totalValue = calcTotalPrice(
           cartItemsList,
         );
