@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../model/product/product_detail.dart';
+import '../../gift_detail/view/gift_detail_view.dart';
 
 class GiftFindingResultView extends StatefulWidget {
   const GiftFindingResultView({Key? key}) : super(key: key);
@@ -48,17 +49,18 @@ class _GiftFindingResultViewState extends State<GiftFindingResultView> {
                     productList.length,
                     (index) => InkWell(
                       onTap: () {
-                        // Navigator.push<Object?>(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => GiftDetailView(
-                        //       name: productList[index].name ?? '',
-                        //       price: productList[index].price ?? '',
-                        //       imagePath: productList[index].id ?? '',
-                        //       description: '',
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push<Object?>(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GiftDetailView(
+                              name: productList[index].name ?? '',
+                              price: productList[index].price ?? '',
+                              imagePath: productList[index].id ?? '',
+                              description:
+                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                            ),
+                          ),
+                        );
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),

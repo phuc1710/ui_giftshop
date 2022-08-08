@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import '../../../model/icon/gift_shop_app_icons.dart';
+import '../../../model/product/product_detail.dart';
 import '../../cart/view/cart_view.dart';
+import '../../gift_detail/view/gift_detail_view.dart';
 import '../../gift_finding/view/gift_finding_result_view.dart';
 import 'page_indicator.dart';
 
@@ -36,7 +39,7 @@ class _HomeTabViewState extends State<HomeTabView> {
               'Quà sinh nhật phổ biến',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            PopularGifts(),
+            const PopularGifts(),
             const Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 4),
               child: Text(
@@ -127,35 +130,9 @@ class CategorySection extends StatelessWidget {
 }
 
 class PopularGifts extends StatelessWidget {
-  PopularGifts({
+  const PopularGifts({
     Key? key,
   }) : super(key: key);
-
-  final List<String> product = [
-    'Gấu Teddy',
-    'Thỏ trắng',
-    'Minions',
-    'Ngựa cưỡi',
-    'Rô bốt',
-    'Xe 4 bánh',
-  ];
-  final List<String> price = [
-    '220 000 đ',
-    '150 000 đ',
-    '220 000 đ',
-    '150 000 đ',
-    '220 000 đ',
-    '150 000 đ',
-  ];
-
-  final List<String> imageFileName = [
-    'teddy',
-    'rabbit',
-    'minion',
-    'horse',
-    'robot',
-    'bike'
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -164,44 +141,63 @@ class PopularGifts extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: product.length,
+        itemCount: productList.length,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.2,
-              color: const Color(0xFFFFD4DE),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: SizedBox.square(
-                        dimension: MediaQuery.of(context).size.height * 0.09,
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: Image.asset(
-                            'assets/images/${imageFileName[index]}.jpg',
+          child: InkWell(
+            onTap: () {
+              Navigator.push<Object?>(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GiftDetailView(
+                    name: productList[index].name ?? '',
+                    price: productList[index].price ?? '',
+                    imagePath: productList[index].id ?? '',
+                    description:
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                  ),
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.2,
+                color: const Color(0xFFFFD4DE),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: SizedBox.square(
+                          dimension: MediaQuery.of(context).size.height * 0.09,
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: Hero(
+                              tag: '${productList[index].id}ImagePath',
+                              child: Image.asset(
+                                'assets/images/${productList[index].id}.jpg',
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    product[index],
-                    style: const TextStyle(fontSize: 10),
-                  ),
-                  Text(
-                    price[index],
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      '${productList[index].name}',
+                      style: const TextStyle(fontSize: 10),
                     ),
-                  )
-                ],
+                    Text(
+                      '${productList[index].price}',
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -302,7 +298,7 @@ class HeaderRow extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {},
-          child: const Icon(Icons.adobe_outlined),
+          child: const Icon(LineAwesomeIcons.gift),
         ),
         Expanded(
           child: Padding(
