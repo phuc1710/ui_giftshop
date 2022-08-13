@@ -18,13 +18,6 @@ class Product {
   final String? description;
 }
 
-const teddy = Product(
-  name: 'Gấu bông',
-  price: '220,000 đ',
-  id: 'teddy',
-  description: '',
-);
-
 final productList = [
   const Product(
     name: 'Gấu bông',
