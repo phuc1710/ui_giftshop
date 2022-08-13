@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import '../../../model/icon/gift_shop_app_icons.dart';
 import '../../../model/product/product_detail.dart';
@@ -9,6 +8,7 @@ import '../../cart/view/cart_view.dart';
 import '../../gift_detail/view/gift_detail_view.dart';
 import '../../gift_finding/view/gift_finding_result_view.dart';
 import 'page_indicator.dart';
+import 'wrapper_card.dart';
 
 class HomeTabView extends StatefulWidget {
   const HomeTabView({Key? key}) : super(key: key);
@@ -35,11 +35,6 @@ class _HomeTabViewState extends State<HomeTabView> {
               child: const HeaderRow(),
             ),
             const ImageSlider(),
-            const Text(
-              'Quà sinh nhật phổ biến',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const PopularGifts(),
             const Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 4),
               child: Text(
@@ -47,7 +42,12 @@ class _HomeTabViewState extends State<HomeTabView> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            CategorySection()
+            CategorySection(),
+            const Text(
+              'Quà sinh nhật phổ biến',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const PopularGifts(),
           ],
         ),
       ),
@@ -84,8 +84,10 @@ class CategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: height * 0.3,
       child: GridView.count(
         crossAxisCount: 4,
         mainAxisSpacing: 20,
@@ -96,24 +98,21 @@ class CategorySection extends StatelessWidget {
           (index) => InkWell(
             onTap: () {},
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: height * 0.1,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(10),
                       child: Container(
                         color: const Color(0xFFFFD4DE),
-                        width: MediaQuery.of(context).size.height * 0.07,
-                        height: MediaQuery.of(context).size.height * 0.07,
+                        width: height * 0.07,
+                        height: height * 0.07,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Icon(
-                            icons[index],
-                            size: 32,
-                          ),
+                          child: Icon(icons[index], size: 32),
                         ),
                       ),
                     ),
@@ -136,8 +135,10 @@ class PopularGifts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.18,
+      height: height * 0.18,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -170,9 +171,9 @@ class PopularGifts extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                         child: SizedBox.square(
-                          dimension: MediaQuery.of(context).size.height * 0.09,
+                          dimension: height * 0.09,
                           child: FittedBox(
                             fit: BoxFit.cover,
                             child: Hero(
@@ -241,44 +242,33 @@ class _ImageSliderState extends State<ImageSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: MediaQuery.of(context).size.height * 0.02,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFFFFD4DE),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          height: MediaQuery.of(context).size.height * 0.22,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              PageView(
-                controller: _controller,
-                onPageChanged: (index) => setState(() {
-                  page = index;
-                }),
-                children: List.generate(3, (index) {
-                  return FittedBox(
-                    fit: BoxFit.fill,
-                    child: Image.asset('assets/images/image_slider_$index.png'),
-                  );
-                }),
-              ),
-              PageIndicator(
-                controller: _controller,
-                pageCount: 3,
-              )
-            ],
+      padding: EdgeInsets.symmetric(vertical: height * 0.02),
+      child: WrapperCard(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: SizedBox(
+            height: height * 0.22,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                PageView(
+                  controller: _controller,
+                  onPageChanged: (index) => setState(() => page = index),
+                  children: List.generate(
+                    3,
+                    (index) => FittedBox(
+                      fit: BoxFit.fill,
+                      child:
+                          Image.asset('assets/images/image_slider_$index.png'),
+                    ),
+                  ),
+                ),
+                PageIndicator(controller: _controller, pageCount: 3)
+              ],
+            ),
           ),
         ),
       ),
@@ -287,36 +277,19 @@ class _ImageSliderState extends State<ImageSlider> {
 }
 
 class HeaderRow extends StatelessWidget {
-  const HeaderRow({
-    Key? key,
-  }) : super(key: key);
+  const HeaderRow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        InkWell(
-          onTap: () {},
-          child: const Icon(LineAwesomeIcons.gift),
-        ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.05,
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 5,
-                    offset: const Offset(0, 3),
-                  )
-                ],
-              ),
+            padding: EdgeInsets.only(right: width * 0.02),
+            child: WrapperCard(
               child: TextField(
                 textInputAction: TextInputAction.search,
                 onSubmitted: (value) =>
@@ -328,10 +301,8 @@ class HeaderRow extends StatelessWidget {
                 ),
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width * 0.03,
-                    left: MediaQuery.of(context).size.width * 0.03,
-                  ),
+                  contentPadding:
+                      EdgeInsets.only(top: width * 0.03, left: width * 0.03),
                   hintText: 'Nhập tên món quà của bạn?',
                   hintStyle: const TextStyle(fontSize: 14),
                   suffixIcon: const Icon(Icons.search),
@@ -347,7 +318,15 @@ class HeaderRow extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const CartView()),
             );
           },
-          child: const Icon(Icons.shopping_cart_outlined),
+          child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 8,
+            child: const Padding(
+              padding: EdgeInsets.all(12.0),
+              child: Icon(Icons.shopping_cart_outlined),
+            ),
+          ),
         ),
       ],
     );
