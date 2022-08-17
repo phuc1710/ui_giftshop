@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../tracking/view/tracking_view.dart';
+import '../../../config/router/routes.dart';
 
 class CompletePaymentView extends StatelessWidget {
   const CompletePaymentView({Key? key}) : super(key: key);
@@ -37,11 +38,7 @@ class CompletePaymentView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                onTap: () => Navigator.of(context).push<Object?>(
-                  MaterialPageRoute(
-                    builder: (context) => const TrackingView(),
-                  ),
-                ),
+                onTap: () => context.router.pushNamed(Routes.tracking),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.08,
@@ -65,8 +62,7 @@ class CompletePaymentView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                onTap: () =>
-                    Navigator.of(context).popUntil((route) => route.isFirst),
+                onTap: () => context.router.popUntil((route) => route.isFirst),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.08,

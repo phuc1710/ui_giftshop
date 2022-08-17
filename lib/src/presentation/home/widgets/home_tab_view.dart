@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../config/router/app_router.dart';
+import '../../../config/router/routes.dart';
 import '../../../model/icon/gift_shop_app_icons.dart';
 import '../../../model/product/product_detail.dart';
-import '../../cart/view/cart_view.dart';
-import '../../gift_detail/view/gift_detail_view.dart';
-import '../../gift_finding/view/gift_finding_result_view.dart';
 import 'page_indicator.dart';
 import 'wrapper_card.dart';
 
@@ -146,20 +146,15 @@ class PopularGifts extends StatelessWidget {
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8),
           child: InkWell(
-            onTap: () {
-              Navigator.push<Object?>(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => GiftDetailView(
-                    name: productList[index].name ?? '',
-                    price: productList[index].price ?? '',
-                    imagePath: productList[index].id ?? '',
-                    description:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                  ),
-                ),
-              );
-            },
+            onTap: () => context.router.push(
+              GiftDetailRoute(
+                name: productList[index].name ?? '',
+                price: productList[index].price ?? '',
+                imagePath: productList[index].id ?? '',
+                description:
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+              ),
+            ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Container(
@@ -292,12 +287,9 @@ class HeaderRow extends StatelessWidget {
             child: WrapperCard(
               child: TextField(
                 textInputAction: TextInputAction.search,
-                onSubmitted: (value) =>
-                    Navigator.of(context).pushAndRemoveUntil<Object?>(
-                  MaterialPageRoute(
-                    builder: (context) => const GiftFindingResultView(),
-                  ),
-                  (route) => route.isFirst,
+                onSubmitted: (value) => context.router.pushAndPopUntil(
+                  const GiftFindingResultRoute(),
+                  predicate: (route) => route.isFirst,
                 ),
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -312,12 +304,7 @@ class HeaderRow extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () {
-            Navigator.push<Object?>(
-              context,
-              MaterialPageRoute(builder: (context) => const CartView()),
-            );
-          },
+          onTap: () => context.router.pushNamed(Routes.cart),
           child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

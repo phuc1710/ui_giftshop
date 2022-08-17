@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'gift_finding_by_occasion_view.dart';
+import '../../../config/router/routes.dart';
 
 class GiftFindingByAgeView extends StatefulWidget {
   const GiftFindingByAgeView({Key? key}) : super(key: key);
@@ -105,7 +106,7 @@ class _GiftFindingByAgeViewState extends State<GiftFindingByAgeView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InkWell(
-                    onTap: () => Navigator.of(context).pop(),
+                    onTap: () => context.router.pop(),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: MediaQuery.of(context).size.height * 0.02,
@@ -127,9 +128,7 @@ class _GiftFindingByAgeViewState extends State<GiftFindingByAgeView> {
                         child: const Center(
                           child: Text(
                             'Trở lại',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ),
@@ -142,12 +141,8 @@ class _GiftFindingByAgeViewState extends State<GiftFindingByAgeView> {
                               content: Text('Vui lòng chọn một câu trả lời'),
                             ),
                           )
-                        : Navigator.of(context).push<Object?>(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const GiftFindingByOccasionView(),
-                            ),
-                          ),
+                        : context.router
+                            .pushNamed(Routes.giftFindingByOccasion),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: MediaQuery.of(context).size.height * 0.02,

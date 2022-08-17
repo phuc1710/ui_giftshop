@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../config/router/routes.dart';
 import '../../../model/icon/gift_shop_app_icons.dart';
-import '../../gift_finding/view/gift_finding_by_age_view.dart';
 import '../widgets/home_tab_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -30,24 +31,17 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return SafeArea(
       child: Scaffold(
         body: tabs[_selectedIndex],
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context).push<Object?>(
-                MaterialPageRoute(
-                  builder: (context) => const GiftFindingByAgeView(),
-                ),
-              );
-            },
+            onPressed: () => context.router.pushNamed(Routes.giftFindingByAge),
             backgroundColor: const Color(0xFFFFD4DE),
-            child: const Icon(
-              GiftShopAppIcon.box,
-              color: Color(0xFF335D7E),
-            ),
+            child: const Icon(GiftShopAppIcon.box, color: Color(0xFF335D7E)),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -55,9 +49,7 @@ class _HomeViewState extends State<HomeView> {
           shape: const CircularNotchedRectangle(),
           color: const Color(0xFF8CBFE7),
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.025,
-            ),
+            padding: EdgeInsets.symmetric(vertical: height * 0.025),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               backgroundColor: Colors.transparent,

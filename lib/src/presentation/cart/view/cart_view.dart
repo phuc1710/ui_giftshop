@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../config/router/routes.dart';
 import '../../../model/cart/cart.dart';
-import '../../payment/view/payment_view.dart';
 
 class CartView extends StatefulWidget {
   const CartView({Key? key}) : super(key: key);
@@ -178,11 +179,8 @@ class _CartViewState extends State<CartView> {
                         ),
                         Expanded(
                           child: InkWell(
-                            onTap: () => Navigator.of(context).push<Object?>(
-                              MaterialPageRoute(
-                                builder: (context) => const PaymentView(),
-                              ),
-                            ),
+                            onTap: () =>
+                                context.router.pushNamed(Routes.payment),
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
@@ -314,7 +312,7 @@ class NoProductFoundBody extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => Navigator.of(context).popUntil((route) => route.isFirst),
+          onTap: () => context.router.popUntil((route) => route.isFirst),
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
             height: MediaQuery.of(context).size.height * 0.08,

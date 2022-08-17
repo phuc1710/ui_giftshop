@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../config/router/routes.dart';
 import '../../../core/utils/utils.dart';
 import '../../../model/cart/cart.dart';
 import '../../complete_payment/view/complete_payment_view.dart';
@@ -225,11 +227,7 @@ class BottomPaymentInfoRow extends StatelessWidget {
           ),
           Expanded(
             child: InkWell(
-              onTap: () => Navigator.of(context).push<Object?>(
-                MaterialPageRoute(
-                  builder: (context) => const CompletePaymentView(),
-                ),
-              ),
+              onTap: () => context.router.pushNamed(Routes.completePayment),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
@@ -374,7 +372,7 @@ class _PaymentMethodInfoState extends State<PaymentMethodInfo> {
                         setState(
                           () => paymentMethod = 'Thanh toán khi nhận hàng',
                         );
-                        Navigator.of(context).pop();
+                        context.router.pop();
                       },
                       radius: 15,
                       child: Ink(
@@ -414,7 +412,7 @@ class _PaymentMethodInfoState extends State<PaymentMethodInfo> {
                           () => paymentMethod =
                               'Thẻ ATM nội địa (Internet Banking)',
                         );
-                        Navigator.of(context).pop();
+                        context.router.pop();
                       },
                       child: Ink(
                         height: MediaQuery.of(context).size.height * 0.1,
@@ -546,7 +544,7 @@ class _ShippingMethodInfoState extends State<ShippingMethodInfo> {
                           shippingCost = '20,000 đ';
                         });
                         widget.onNormalShippingSelected();
-                        Navigator.of(context).pop();
+                        context.router.pop();
                       },
                       radius: 15,
                       child: Ink(
@@ -588,7 +586,7 @@ class _ShippingMethodInfoState extends State<ShippingMethodInfo> {
                           shippingCost = '40,000 đ';
                         });
                         widget.onTimedShippingSelected();
-                        Navigator.of(context).pop();
+                        context.router.pop();
                       },
                       child: Ink(
                         height: MediaQuery.of(context).size.height * 0.25,

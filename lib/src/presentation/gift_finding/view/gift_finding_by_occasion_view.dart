@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'gift_finding_result_view.dart';
+import '../../../config/router/app_router.dart';
 
 class GiftFindingByOccasionView extends StatefulWidget {
   const GiftFindingByOccasionView({Key? key}) : super(key: key);
@@ -104,7 +105,7 @@ class _GiftFindingByOccasionViewState extends State<GiftFindingByOccasionView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InkWell(
-                    onTap: () => Navigator.of(context).pop(),
+                    onTap: () => context.router.pop(),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: MediaQuery.of(context).size.height * 0.02,
@@ -126,9 +127,7 @@ class _GiftFindingByOccasionViewState extends State<GiftFindingByOccasionView> {
                         child: const Center(
                           child: Text(
                             'Trở lại',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ),
@@ -141,12 +140,9 @@ class _GiftFindingByOccasionViewState extends State<GiftFindingByOccasionView> {
                               content: Text('Vui lòng chọn một câu trả lời'),
                             ),
                           )
-                        : Navigator.of(context).pushAndRemoveUntil<Object?>(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const GiftFindingResultView(),
-                            ),
-                            (route) => route.isFirst,
+                        : context.router.pushAndPopUntil(
+                            const GiftFindingResultRoute(),
+                            predicate: (route) => route.isFirst,
                           ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -169,9 +165,7 @@ class _GiftFindingByOccasionViewState extends State<GiftFindingByOccasionView> {
                         child: const Center(
                           child: Text(
                             'Tìm quà',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ),

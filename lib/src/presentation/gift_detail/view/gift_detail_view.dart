@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../config/router/routes.dart';
 import '../../../model/cart/cart.dart';
 import '../../cart/view/cart_view.dart';
 
@@ -166,12 +168,7 @@ class _GiftDetailViewState extends State<GiftDetailView> {
                             ),
                           ),
                           InkWell(
-                            onTap: () => Navigator.push<Object?>(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CartView(),
-                              ),
-                            ),
+                            onTap: () => context.router.pushNamed(Routes.cart),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
@@ -201,9 +198,7 @@ class _GiftDetailViewState extends State<GiftDetailView> {
                             duration: Duration(seconds: 2),
                           ),
                         );
-                        Navigator.of(context).popUntil(
-                          (route) => route.isFirst,
-                        );
+                        context.router.popUntil((route) => route.isFirst);
                       },
                       child: Stack(
                         alignment: Alignment.center,
